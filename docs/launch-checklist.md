@@ -2,13 +2,13 @@
 
 ## 今回のGitHub Pages仮公開
 
-- [ ] main・/(root)を公開元に設定
-- [ ] https://aik38.github.io/stars-hub-lp/ の全ページを確認
-- [ ] 全HTMLの `noindex, nofollow` を確認
-- [ ] `robots.txt`: `User-agent: *` / `Disallow: /` を確認
-- [ ] PC・スマホ、内部リンク、LINE・メール、FAQ・メニューを確認
-- [ ] 保全対象repoのmain HEADが `ff3b3266c7a91c61b2211cf70f00226f75687a1e` のままであることを確認
-- [ ] https://kuchikomi-stars.com/ の正常表示を確認
+- [x] main・/(root)を公開元に設定
+- [x] https://aik38.github.io/stars-hub-lp/ の全ページを確認
+- [x] 全HTMLの `noindex, nofollow` を確認
+- [x] `robots.txt`: `User-agent: *` / `Disallow: /` を確認
+- [x] PC・スマホ、内部リンク、LINE・メール、FAQ・メニューを確認
+- [x] 保全対象repoのmain HEADが `ff3b3266c7a91c61b2211cf70f00226f75687a1e` のままであることを確認
+- [x] https://kuchikomi-stars.com/ の正常表示を確認
 
 ## 将来の本番公開（今回は実行しない）
 

@@ -44,5 +44,6 @@ GitHubのSettings → Pages → Build and deploymentで、Sourceを **Deploy fro
 - [デザイン仕様](docs/design-spec.md)
 - [公開チェックリスト](docs/launch-checklist.md)
 - [検証記録](docs/verification.md)
+- [画面幅・公開HTTP応答の確認用ページ](docs/responsive-check.html)
 
 料金・案件定義・サービス内容・CTAは2026年10月5日の制作指示に準拠します。最低契約期間、解約・返金条件、支払期限、SLA等の未確定条件は掲載していません。
