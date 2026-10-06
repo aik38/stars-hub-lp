@@ -93,12 +93,15 @@ async function main() {
   assert.equal(new URL(page.url()).pathname,'/pricing/');
   await page.locator('footer').getByRole('link',{name:'導入について相談する',exact:true}).click();
   assert.equal(new URL(page.url()).pathname,'/contact/');
+  await page.waitForLoadState('load');await tick(page);
   for(const id of ['store','name','service','message']){
     assert.equal(await page.locator(`label[for=${id}]`).count(),1);
     assert.equal(await page.locator('#'+id).isVisible(),true);
   }
+  await context.grantPermissions(['clipboard-read','clipboard-write'],{origin:base});
   await page.getByRole('button',{name:'アドレスをコピー',exact:true}).click();
-  await page.getByRole('status').filter({hasText:'メールアドレスをコピーしました。'}).waitFor({state:'visible'});
+  await page.getByRole('status').filter({hasText:'メールアドレスをコピーしました。'}).waitFor({state:'visible',timeout:5000});
+  assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'m-asakura@killerword.info');
   await page.locator('footer').getByRole('link',{name:'プライバシーポリシー',exact:true}).click();
   assert.equal(new URL(page.url()).pathname,'/privacy/');
   await page.locator('footer').getByRole('link',{name:'運営者情報',exact:true}).click();
