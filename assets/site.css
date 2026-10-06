@@ -30,3 +30,6 @@
 
 .phrase{white-space:nowrap}.mobile-break{display:none}
 @media(max-width:767px){.hero-visual{height:300px;display:block;margin-top:12px}.hero-visual img{width:310px;max-width:100%;margin:0 auto;transform:translateY(-15px)}.mobile-break{display:block}}
+
+.contact-mail{grid-column:2;grid-row:1}.contact-guide{grid-column:1;grid-row:1}
+@media(max-width:767px){.contact-mail{grid-column:1;grid-row:1}.contact-guide{grid-column:1;grid-row:2}}
