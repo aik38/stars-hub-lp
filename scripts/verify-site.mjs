@@ -129,7 +129,13 @@ try {
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'FAQ overflow');
         await button.click();
       }
-      await page.keyboard.press('Control+Home');
+      // Reset explicitly so sticky headers and focused skip links do not
+      // obscure the full-page evidence after FAQ interaction.
+      await page.evaluate(() => {
+        document.activeElement?.blur();
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
+      await page.waitForFunction(() => scrollY === 0);
       await page.screenshot({ path: path.join(output, `${route.replaceAll('/','-') || 'top'}-${width}.png`), fullPage: true });
       record.checks = checks;
       record.pass = Object.values(checks).every(Boolean);

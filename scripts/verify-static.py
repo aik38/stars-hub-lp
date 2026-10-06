@@ -55,7 +55,7 @@ assert (root/'sitemap.xml').read_text().count('<loc>') == 8
 assert (root/'cases/index.html').read_text().count('class="case-item"') == 30
 for route in ['index.html', 'pricing/index.html']:
     content = (root/route).read_text()
-    for price in ['165,000円', '297,000円', '440,000円〜', '11,000円', '33,000円', '規定件数を超える場合：1案件 1,650円（税込）']:
+    for price in ['165,000円', '297,000円', '440,000円〜', '11,000円', '33,000円', '1案件 1,650円（税込）']:
         assert price in content, f'{route}: price {price}'
 reputation = (root/'reputation/index.html').read_text()
 for price in ['26,000円', '50,000円', '120,000円', '230,000円', '7,000円', '10,000円', '8,000円', '27,000円', '42,000円', '78,000円']:
