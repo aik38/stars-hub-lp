@@ -1,4 +1,4 @@
-/* Top-page design tokens. Detail pages continue to use site.css. */
+/* Shared design system, preserving the approved top-page styles. */
 :root {
   --blue-dark: #004E98;
   --blue-main: #0E84E5;

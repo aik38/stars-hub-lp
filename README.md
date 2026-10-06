@@ -25,7 +25,8 @@
 
 GitHub Pagesは `main` のルートを公開し、`.nojekyll` と `CNAME`（`killerword.info`）を使用しています。main更新後の `pages build and deployment` が本番更新を行います。GA4測定IDは `G-8S2N18S2YX`。canonical・OGP・Twitter情報とsitemapは本番URLに統一しています。404はnoindex、sitemapは8URLです。
 
-LINE： https://lin.ee/X0mxy9O  
+LINE： https://lin.ee/X0mxy9O
+
 メール： m-asakura@killerword.info
 
 問い合わせフォームはありません。Cloudflare・DNS・Google Workspace・メール・Search Consoleの設定変更は、このサイト更新の対象外です。
