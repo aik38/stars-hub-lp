@@ -87,7 +87,7 @@ try {
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'FAQ overflow');
         await button.click();
       }
-      await page.locator('body').press('Home');
+      await page.keyboard.press('Control+Home');
       await page.screenshot({ path: path.join(output, `${route.replaceAll('/','-') || 'top'}-${width}.png`), fullPage: true });
       record.checks = checks;
       record.pass = Object.values(checks).every(Boolean);

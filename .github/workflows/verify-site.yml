@@ -23,10 +23,20 @@ jobs:
         run: |
           python -m http.server 8000 > /tmp/stars-hub-server.log 2>&1 &
           node scripts/verify-site.mjs
-      - name: Preserve verification evidence
+      - name: Check the published production site
+        if: github.ref == 'refs/heads/main'
+        env:
+          SITE_BASE_URL: https://killerword.info/
+          VERIFICATION_OUTPUT: production-verification-output
+        run: |
+          python scripts/wait-production.py
+          node scripts/verify-site.mjs
+      - name: Preserve all verification evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: stars-hub-verification
-          path: verification-output/
+          path: |
+            verification-output/
+            production-verification-output/
           retention-days: 14
