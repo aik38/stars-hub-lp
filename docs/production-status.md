@@ -1,19 +1,29 @@
-# 本番状態（2026年10月7日）
+# 本番状態（2026年10月7日・料金差分）
 
 本番URL： https://killerword.info/
 
 ## 公開・検証済み
 
-- 実装のmain反映前：`1dd7d9ebd2c58147fb7a1791828e53c777ce9b0a`。
-- 本番実装commit：`8780b1fcd612578e18421cef206403d9a8da72a4`。
-- 作業ブランチ：`work/full-site-completion-20261007`。実装と最終Docsを保存。
-- 保全ブランチ：`backup/pre-full-site-completion-20261007`。反映前SHAを保持し、変更・削除していない。
-- [Pagesデプロイ run 37515172122](https://github.com/aik38/stars-hub-lp/actions/runs/37515172122)：success。
-- [全ページ・本番検証 run 37515172589](https://github.com/aik38/stars-hub-lp/actions/runs/37515172589)：success。
-- 本番9ページとCSS・JS・favicon・OGP・robots・sitemap、合計16ファイルは実装内容とSHA-256で一致。
-- 本番9ページ×1440・1024・768・390・360px、45/45通り合格。
-- 存在しないURLはHTTP 404、共通デザインの専用404本文とトップへのリンクを確認。
-- ブラウザでトップ・導入事例・受付・料金・集客支援／リスク対策・問い合わせ・privacy・legal・404を表示確認。
+- 今回の修正前main：`13077b51920a17c6c786666799ae982c7a53f556`。開始時の[Pages run 37515948768](https://github.com/aik38/stars-hub-lp/actions/runs/37515948768)はsuccess。
+- 本番実装commit：`f6acea1995405053ec8309ea1dcd71fe8fa330b9`。この後のDocs同期は公開HTML・CSS・JS・画像を変更しない。
+- 作業ブランチ：`work/pricing-refinement-20261007`。検証済み実装と最終Docsを保存。
+- 今回の保全ブランチ：`backup/pre-pricing-refinement-20261007`。修正前mainを保持し、作成後は変更していない。
+- 既存保全ブランチ：`backup/pre-full-site-completion-20261007`。`1dd7d9ebd2c58147fb7a1791828e53c777ce9b0a`を保持し、変更・削除していない。
+- [実装のPages run 37520130996](https://github.com/aik38/stars-hub-lp/actions/runs/37520130996)：success。
+- [作業ブランチ検証 run 37519775080](https://github.com/aik38/stars-hub-lp/actions/runs/37519775080)：success、45/45通り合格。
+- [main・本番検証 run 37520130678](https://github.com/aik38/stars-hub-lp/actions/runs/37520130678)：success。ローカル45通り、本番45通りが合格。
+- 本番9ページとCSS・JS・favicon・OGP・robots・sitemap、合計16ファイルが実装内容とSHA-256で一致。
+- 本番9ページ×1440・1024・768・390・360px、45/45通り合格。横スクロール・はみ出しなし。
+- 存在しないURLはHTTP 404で、専用404本文とトップへのリンクを確認。
+- 本番トップ・料金・集客支援／リスク対策をブラウザで確認。料金FAQの新料金、トップの料金表と注記の強弱も確認。
+
+## 今回の料金変更
+
+規定件数を超える場合：**1案件 1,650円（税込）**。トップ・料金ページの補足とFAQ、料金ページのdescription・OG・Twitterを統一した。注記は14px・`#4B5158`で、初期導入費より低い視覚階層。金額と税込の語は途中で分割しない。
+
+`/pricing/` に集客支援・リスク対策の料金概要と `/reputation/` への詳細リンクを追加。`/reputation/` に媒体制作4段階、プロフィール文章2メニュー、掲示板対策4段階と初回注記、投稿モニタリングの個別案内を追加。各金額は [design-spec](design-spec.md) に記録。クチコミスターズの料金は公式サイトへ案内する。
+
+現行ページ・SEO情報に旧追加案件単価と旧見出しは残っていない。日付付きレビュー・旧検証資料は履歴として保持した。
 
 ## 公開ページ
 
@@ -29,14 +39,12 @@
 | https://killerword.info/legal/ | 200 |
 | https://killerword.info/404.html | 200 |
 
-## 完成内容
+## 維持・同期
 
-トップは指定の軽微修正に限定。全詳細ページをトップの配色・フォント・幅・ヘッダー・フッター・CTAへ統一。導入事例は提供された30件を6分類で掲載。予約受付、料金・案件定義、集客支援とリスク対策、相談窓口を整理した。privacy・legalの本文は変更前と完全一致。
+完成済みのデザイン・配色・フォント・1200px幅・余白・ヘッダー・フッター・CTAを維持。予約受付の月額、初期費用、案件定義、30事例、法務・運営情報、top.jsは変更していない。
 
-GA4は `G-8S2N18S2YX` を全9ページで維持。CNAMEは `killerword.info`。公開ページはindex、404はnoindex。sitemapは8URL。LINE・メール宛先を維持し、問い合わせフォームは設けていない。
+GA4は `G-8S2N18S2YX`、CNAMEは `killerword.info`。公開ページはindex、404はnoindex。sitemapは8URL。LINE・メール宛先を維持し、問い合わせフォームなし。
 
-README、design-spec、production-status、verification、launch-checklistを実装と確認結果へ同期。旧レビュー冒頭にHISTORICALを追記。旧検証HTML・JSONは日付付き履歴として保持し、現行結果は `responsive-results.json` へ保存。AGENTS.mdに参照順位と維持ルールを記録。
-
-実装検証完了後の更新はDocsと検証workflowの実行条件のみで、公開HTML・CSS・JS・画像は変更していない。Docsだけの変更ではブラウザ検証を再実行せず、Pagesの公開結果を確認する。
+README、design-spec、production-status、verification、現行responsive-results.jsonを料金仕様と実際の結果へ同期。AGENTS.mdの参照順位と過去資料は維持。Docsのみの最終commitではブラウザ検証を再実行せず、Pagesの公開成功を確認する。
 
 Cloudflare・DNS・Google Workspace・メール・Search Consoleの設定は変更していない。
