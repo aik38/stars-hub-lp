@@ -36,6 +36,7 @@ LINE： https://lin.ee/X0mxy9O
 - [現行デザイン正本](docs/design-spec.md)
 - [本番状態](docs/production-status.md)
 - [検証記録](docs/verification.md)
+- [本番の全画面幅検証結果](docs/responsive-results.json)
 - [本番更新チェックリスト](docs/launch-checklist.md)
 - [実装時の参照順位](AGENTS.md)
 

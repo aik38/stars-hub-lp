@@ -2,12 +2,19 @@ name: Verify STARS HUB site
 on:
   push:
     branches: [main, work/full-site-completion-20261007]
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
+      - "AGENTS.md"
+      - ".gitignore"
+      - ".github/workflows/verify-site.yml"
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
