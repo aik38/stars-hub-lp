@@ -1,3 +1,6 @@
+> 過去レビュー / HISTORICAL。現行設計の正本ではない。
+> 現行設計は [design-spec.md](design-spec.md) を参照。
+
 # STARS HUB 本番復旧・営業LP改善設計書
 
 提出日：2026年10月6日。対象：`aik38/stars-hub-lp` / https://killerword.info/

@@ -1,49 +1,45 @@
-# STARS HUB LP
+# STARS HUB
 
-スターズハブの予約受付・カスタマーサポートを案内する静的サイトです。
+本番URL： https://killerword.info/
 
-- GitHub: https://github.com/aik38/stars-hub-lp
-- GitHub Pages仮URL: https://aik38.github.io/stars-hub-lp/
-- 将来の本番予定ドメイン: `killerword.info`（今回は接続しません）
+予約受付・カスタマーサポートの全体像から、任せられる業務、導入効果、料金、相談窓口までを案内する営業サイトです。集客支援とリスク対策も掲載しています。
 
 ## ページ構成
 
-| パス | 内容 |
+| URL | 役割 |
 | --- | --- |
-| `/` | トップページ |
-| `/contact-center/` | 予約受付・カスタマーサポート |
-| `/reputation/` | 集客・評判対策・ネット監視 |
-| `/pricing/` | 料金 |
-| `/contact/` | LINE・メールでのお問い合わせ |
+| `/` | サービス全体像の要約 |
+| `/contact-center/` | 受付・管理・共有の業務範囲と運用 |
+| `/cases/` | 6分類・30件の導入事例・お客様の声 |
+| `/pricing/` | 月額、初期費用、超過、案件定義、カウント例、FAQ |
+| `/reputation/#growth` | 媒体・求人コンテンツ制作、クチコミスターズ |
+| `/reputation/#risk` | 掲示板対策、投稿モニタリング |
+| `/contact/` | LINE・メールの相談窓口 |
 | `/privacy/` | プライバシーポリシー |
 | `/legal/` | 運営者情報 |
-| `/404.html` | ページが見つからない場合の案内 |
+| `/404.html` | 存在しないURLからトップへ戻る案内 |
 
-仮URLでは、上記パスの先頭に `/stars-hub-lp` が付きます。
+## 使用技術と公開
 
-## 使用技術
+静的HTML・CSS・最小限のJavaScript。全ページは、承認済みトップの `assets/top.css` と `assets/top.js` を共有し、詳細ページの構造は `assets/details.css` で補います。Noto Sans JPはGoogle Fontsから読み込み、フォールバックも指定しています。
 
-HTML、CSS、必要最小限のJavaScript、独自インラインSVG。フレームワーク・外部フォント・外部JavaScript・解析タグ・Cookieを使用しません。FAQはHTMLの`details`を使用し、JavaScriptが無効でも主要内容・ナビゲーション・FAQを利用できます。
+GitHub Pagesは `main` のルートを公開し、`.nojekyll` と `CNAME`（`killerword.info`）を使用しています。main更新後の `pages build and deployment` が本番更新を行います。GA4測定IDは `G-8S2N18S2YX`。canonical・OGP・Twitter情報とsitemapは本番URLに統一しています。404はnoindex、sitemapは8URLです。
 
-## Pages公開方法
+LINE： https://lin.ee/X0mxy9O  
+メール： m-asakura@killerword.info
 
-GitHubのSettings → Pages → Build and deploymentで、Sourceを **Deploy from a branch**、Branchを **main**、フォルダを **/(root)** に設定します。`.nojekyll` により、HTML等をそのまま配信します。変更はmainへのcommitで再公開されます。
-
-ローカル確認: このリポジトリの親フォルダで `python -m http.server 8000` を実行し、`http://localhost:8000/stars-hub-lp/` を開きます。
-
-## 仮公開と本番切替
-
-全HTMLに`noindex, nofollow`、`robots.txt`に`Disallow: /`を設定しています。仮公開中は検索掲載を意図しません。robots.txtはドメイン直下のファイルを参照する仕様のため、プロジェクトPages配下では各ページのnoindexも必須です。
-
-今回はCNAME、独自ドメイン向けcanonical・og:url、sitemap、GA4、Search Consoleを設定していません。既存のクチコミスターズのリポジトリ・本番サイト・メール・DNSも変更対象外です。
-
-本番切替前に、[公開チェックリスト](docs/launch-checklist.md)に沿ってドメイン・DNS・HTTPS・検索設定・OGP等を確認します。独自ドメインへの切替時には404ページのルートリンクも更新します。
+問い合わせフォームはありません。Cloudflare・DNS・Google Workspace・メール・Search Consoleの設定変更は、このサイト更新の対象外です。
 
 ## 設計と検証
 
-- [デザイン仕様](docs/design-spec.md)
-- [公開チェックリスト](docs/launch-checklist.md)
+- [現行デザイン正本](docs/design-spec.md)
+- [本番状態](docs/production-status.md)
 - [検証記録](docs/verification.md)
-- [画面幅・公開HTTP応答の確認用ページ](docs/responsive-check.html)
+- [本番更新チェックリスト](docs/launch-checklist.md)
+- [実装時の参照順位](AGENTS.md)
 
-料金・案件定義・サービス内容・CTAは2026年10月5日の制作指示に準拠します。最低契約期間、解約・返金条件、支払期限、SLA等の未確定条件は掲載していません。
+2026年10月7日のサイト全体完成版指示に基づき、main `1dd7d9ebd2c58147fb7a1791828e53c777ce9b0a` のトップを基準として統一しています。保全ブランチ `backup/pre-full-site-completion-20261007` は変更しません。日付付き旧レビュー・旧検証結果は履歴です。
+
+ローカル表示：リポジトリ直下で `python -m http.server 8000` を実行し、`http://localhost:8000/` を開きます。
+
+検証：`python scripts/verify-static.py`。ブラウザ検証は `scripts/verify-site.mjs` と `.github/workflows/verify-site.yml` で、9ページ×5画面幅を確認します。GA4へのテスト送信は遮断し、タグと測定IDの維持をソースで確認します。

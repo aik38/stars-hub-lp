@@ -1,0 +1,32 @@
+name: Verify STARS HUB site
+on:
+  push:
+    branches: [main, work/full-site-completion-20261007]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install verification browser
+        run: |
+          npm install --no-save --package-lock=false playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Check static page and link integrity
+        run: python scripts/verify-static.py
+      - name: Check all pages and viewport widths
+        run: |
+          python -m http.server 8000 > /tmp/stars-hub-server.log 2>&1 &
+          node scripts/verify-site.mjs
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stars-hub-verification
+          path: verification-output/
+          retention-days: 14

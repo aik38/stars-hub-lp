@@ -1,0 +1,130 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+
+const base = process.env.SITE_BASE_URL || 'http://127.0.0.1:8000/';
+const routes = ['', 'contact-center/', 'cases/', 'pricing/', 'reputation/', 'contact/', 'privacy/', 'legal/', '404.html'];
+const widths = [1440, 1024, 768, 390, 360];
+const output = process.env.VERIFICATION_OUTPUT || 'verification-output';
+await fs.mkdir(output, { recursive: true });
+const browser = await chromium.launch({ headless: true });
+const records = [];
+const failures = [];
+const responses = [];
+try {
+  for (const width of widths) {
+    const context = await browser.newContext({ viewport: { width, height: 1000 } });
+    // Keep checks from sending artificial traffic to GA4. The exact GA4 source
+    // and config remain in the page and are checked below.
+    await context.route(/googletagmanager\.com|google-analytics\.com/, route => route.fulfill({ status: 200, body: '' }));
+    const page = await context.newPage();
+    for (const route of routes) {
+      const errors = [];
+      const onError = error => errors.push(error.message);
+      page.on('pageerror', onError);
+      const response = await page.goto(new URL(route, base).href, { waitUntil: 'networkidle' });
+      await page.evaluate(() => document.fonts.ready);
+      const record = await page.evaluate(() => {
+        const visible = el => !!el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden';
+        const overflow = [...document.body.querySelectorAll('*')].filter(el => visible(el) && !el.closest('.skip-link')).filter(el => {
+          const box = el.getBoundingClientRect();
+          return box.width && (box.left < -1 || box.right > innerWidth + 1);
+        }).map(el => ({ tag: el.tagName, class: el.className, text: el.textContent.trim().slice(0, 80) }));
+        const targets = [...document.querySelectorAll('.button,.menu-toggle,.footer-nav a,.site-nav a,.faq-question,.case-index a,.section-index a')].filter(visible);
+        return {
+          viewport: innerWidth, scrollWidth: document.documentElement.scrollWidth, overflow,
+          h1: [...document.querySelectorAll('h1')].map(el => el.textContent.trim()),
+          title: document.title, description: document.querySelector('meta[name=description]')?.content,
+          canonical: document.querySelector('link[rel=canonical]')?.href,
+          ogURL: document.querySelector('meta[property="og:url"]')?.content,
+          ogTitle: document.querySelector('meta[property="og:title"]')?.content,
+          ogDescription: document.querySelector('meta[property="og:description"]')?.content,
+          ogImage: document.querySelector('meta[property="og:image"]')?.content,
+          twitter: ['card','title','description','image'].map(name => document.querySelector(`meta[name="twitter:${name}"]`)?.content),
+          ga4: [...document.scripts].filter(el => el.src.includes('gtag/js?id=G-8S2N18S2YX')).length,
+          ga4Config: [...document.scripts].some(el => el.textContent.includes("gtag('config', 'G-8S2N18S2YX')")),
+          forms: document.forms.length, css: [...document.querySelectorAll('link[rel=stylesheet]')].map(el => new URL(el.href).pathname),
+          font: getComputedStyle(document.body).fontFamily,
+          shortTargets: targets.filter(el => el.getBoundingClientRect().height < 43).map(el => el.textContent.trim()),
+          cases: document.querySelectorAll('.case-item').length,
+          robots: document.querySelector('meta[name=robots]')?.content || 'index, follow'
+        };
+      });
+      record.route = route || '/';
+      record.status = response.status();
+      record.errors = errors;
+      const checks = {
+        http: response.status() === 200,
+        width: record.viewport === width && record.scrollWidth <= width && !record.overflow.length,
+        heading: record.h1.length === 1,
+        metadata: !!record.title && !!record.description && !!record.ogTitle && !!record.ogDescription && record.twitter.every(Boolean),
+        canonical: record.canonical === `https://killerword.info/${route}` && record.ogURL === record.canonical,
+        ga4: record.ga4 === 1 && record.ga4Config,
+        noForm: record.forms === 0,
+        style: record.css.includes('/assets/top.css') && !record.css.includes('/assets/site.css') && record.font.includes('Noto Sans JP'),
+        targets: !record.shortTargets.length,
+        cases: route !== 'cases/' || record.cases === 30,
+        errors: !errors.length,
+        indexing: route === '404.html' ? record.robots.includes('noindex') : !record.robots.includes('noindex')
+      };
+      if (width < 1200) {
+        const toggle = page.locator('.menu-toggle');
+        await toggle.click();
+        checks.menuOpen = await toggle.getAttribute('aria-expanded') === 'true' && await page.locator('#site-nav').isVisible();
+        await page.keyboard.press('Escape');
+        checks.menuEscape = await toggle.getAttribute('aria-expanded') === 'false';
+        await toggle.click();
+        await page.locator('#site-nav a[href="/pricing/"],#site-nav a[href="pricing/"]').click();
+        checks.menuLink = new URL(page.url()).pathname === '/pricing/' && await page.locator('.menu-toggle').getAttribute('aria-expanded') === 'false';
+        await page.goto(new URL(route, base).href, { waitUntil: 'networkidle' });
+      }
+      const buttons = await page.locator('.faq-question').all();
+      for (const button of buttons) {
+        await button.click();
+        const answer = page.locator('#' + await button.getAttribute('aria-controls'));
+        checks.faq = checks.faq !== false && await answer.isVisible() && await button.getAttribute('aria-expanded') === 'true';
+        assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'FAQ overflow');
+        await button.click();
+      }
+      await page.locator('body').press('Home');
+      await page.screenshot({ path: path.join(output, `${route.replaceAll('/','-') || 'top'}-${width}.png`), fullPage: true });
+      record.checks = checks;
+      record.pass = Object.values(checks).every(Boolean);
+      records.push(record);
+      if (!record.pass) failures.push(record);
+      console.log(`${record.pass ? 'PASS' : 'FAIL'} ${route || '/'} ${width}px ${JSON.stringify(checks)}`);
+      page.off('pageerror', onError);
+    }
+    await context.close();
+  }
+  const request = await browser.newContext();
+  for (const route of [...routes, 'assets/top.css', 'assets/details.css', 'assets/top.js', 'assets/favicon.svg', 'assets/ogp.png', 'robots.txt', 'sitemap.xml']) {
+    const response = await request.request.get(new URL(route, base).href);
+    responses.push({ route: route || '/', status: response.status() });
+    assert.equal(response.status(), 200, `HTTP ${route}`);
+  }
+  if (process.env.SITE_BASE_URL?.startsWith('https:')) {
+    const response = await request.request.get(new URL('missing-page-verification-20261007/', base).href);
+    assert.equal(response.status(), 404, 'custom 404 status');
+    assert((await response.text()).includes('トップページへ戻る'), 'custom 404 body');
+    responses.push({ route: 'missing-page-verification-20261007/', status: response.status() });
+  }
+  await request.close();
+  const noJS = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 1000 } });
+  const p = await noJS.newPage();
+  for (const route of ['', 'pricing/']) {
+    await p.goto(new URL(route, base).href);
+    assert(await p.locator('.faq-answer').first().isVisible(), 'FAQ without JS');
+    assert(await p.locator('.menu-toggle').isVisible(), 'mobile header without JS');
+    // Contact action stays visible without JS; full navigation stays available
+    // through the common footer, as on the preserved top.
+    assert(await p.locator('.header-actions a').isVisible(), 'mobile contact without JS');
+  }
+  await noJS.close();
+} finally {
+  await fs.writeFile(path.join(output, 'results.json'), JSON.stringify({ base, checkedAt: new Date().toISOString(), total: records.length, passed: records.filter(r => r.pass).length, failures, responses, records }, null, 2));
+  await browser.close();
+}
+assert.equal(records.length, 45);
+assert.equal(failures.length, 0, 'Responsive checks failed');
