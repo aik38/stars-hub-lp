@@ -2,8 +2,10 @@ import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 
 const base = process.env.SITE_BASE_URL || 'http://127.0.0.1:8000/';
+const baseline = process.env.SITE_BASELINE_URL;
 const routes = ['', 'contact-center/', 'cases/', 'pricing/', 'reputation/', 'contact/', 'privacy/', 'legal/', '404.html'];
 const widths = [1440, 1024, 768, 390, 360];
 const output = process.env.VERIFICATION_OUTPUT || 'verification-output';
@@ -19,6 +21,7 @@ try {
     // and config remain in the page and are checked below.
     await context.route(/googletagmanager\.com|google-analytics\.com/, route => route.fulfill({ status: 200, body: '' }));
     const page = await context.newPage();
+    const baselinePage = baseline ? await context.newPage() : null;
     for (const route of routes) {
       const errors = [];
       const onError = error => errors.push(error.message);
@@ -39,6 +42,11 @@ try {
           rows: [...list.children].map(row => [row.querySelector('dt').textContent.trim(), row.querySelector('dd').textContent.trim()])
         }));
         return {
+          bodyText: document.body.innerText,
+          jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(el => JSON.parse(el.textContent)),
+          breadcrumb: document.querySelector('.breadcrumb')?.textContent.trim().split(' / ') || [],
+          lang: document.documentElement.lang,
+          landmarks: ['header', 'main', 'nav', 'footer'].map(tag => document.querySelectorAll(tag).length),
           pricing: {
             additional: additional?.textContent.trim(),
             additionalSize: additional && parseFloat(getComputedStyle(additional).fontSize),
@@ -87,6 +95,26 @@ try {
         errors: !errors.length,
         indexing: route === '404.html' ? record.robots.includes('noindex') : !record.robots.includes('noindex')
       };
+      checks.semantics = record.lang === 'ja' && record.landmarks[0] === 1 && record.landmarks[1] === 1 && record.landmarks[2] > 0 && record.landmarks[3] === 1;
+      if (route === '') {
+        const graph = record.jsonld[0]?.['@graph'];
+        checks.jsonld = record.jsonld.length === 1 && record.jsonld[0]['@context'] === 'https://schema.org' && graph?.length === 2 &&
+          ['WebSite', 'Organization'].every(type => graph.some(node => node['@type'] === type && node.name === 'STARS HUB' && node.alternateName === 'スターズハブ' && node.url === 'https://killerword.info/' && node['@id'] === `https://killerword.info/#${type === 'WebSite' ? 'website' : 'organization'}`));
+      } else if (route === '404.html') {
+        checks.jsonld = record.jsonld.length === 0;
+      } else {
+        const expected = record.breadcrumb.map((name, index) => ({ '@type': 'ListItem', position: index + 1, name, item: index === 0 ? 'https://killerword.info/' : record.canonical }));
+        checks.jsonld = record.jsonld.length === 1 && record.jsonld[0]['@context'] === 'https://schema.org' && record.jsonld[0]['@type'] === 'BreadcrumbList' && expected.length === 2 && JSON.stringify(record.jsonld[0].itemListElement) === JSON.stringify(expected);
+      }
+      if (baselinePage) {
+        await baselinePage.goto(new URL(route, baseline).href, { waitUntil: 'networkidle' });
+        await baselinePage.evaluate(() => document.fonts.ready);
+        const beforeText = await baselinePage.evaluate(() => document.body.innerText);
+        checks.visibleTextUnchanged = beforeText === record.bodyText;
+        record.bodyTextSHA256 = createHash('sha256').update(record.bodyText).digest('hex');
+        record.baselineTextSHA256 = createHash('sha256').update(beforeText).digest('hex');
+      }
+      delete record.bodyText;
       if (route === '' || route === 'pricing/') {
         checks.additionalFee = record.pricing.additional === '規定件数を超える場合：1案件 1,650円（税込）';
         checks.feeHierarchy = record.pricing.additionalSize < record.pricing.initialSize && record.pricing.additionalColor === 'rgb(75, 81, 88)';

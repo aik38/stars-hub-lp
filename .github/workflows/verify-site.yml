@@ -1,7 +1,7 @@
 name: Verify STARS HUB site
 on:
   push:
-    branches: [main, work/full-site-completion-20261007, work/pricing-refinement-20261007]
+    branches: [main, work/full-site-completion-20261007, work/pricing-refinement-20261007, work/technical-seo-20261007]
     paths-ignore:
       - "docs/**"
       - "README.md"
@@ -14,7 +14,10 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    env:
+      SEO_BASELINE_REF: cc9946e0af57222f80edeb082c5f1ea84ae59dfd
+      SITE_BASELINE_URL: http://127.0.0.1:8001/
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,8 +29,15 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Check static page and link integrity
         run: python scripts/verify-static.py
+      - name: Check technical SEO and unchanged content
+        run: |
+          git fetch --no-tags --depth=1 origin "$SEO_BASELINE_REF"
+          python scripts/verify-seo.py --baseline-ref "$SEO_BASELINE_REF"
       - name: Check all pages and viewport widths
         run: |
+          mkdir -p /tmp/stars-hub-seo-baseline
+          git archive "$SEO_BASELINE_REF" | tar -x -C /tmp/stars-hub-seo-baseline
+          python -m http.server 8001 --directory /tmp/stars-hub-seo-baseline > /tmp/stars-hub-baseline.log 2>&1 &
           python -m http.server 8000 > /tmp/stars-hub-server.log 2>&1 &
           node scripts/verify-site.mjs
       - name: Check the published production site
