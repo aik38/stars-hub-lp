@@ -32,3 +32,5 @@
 .contact-email{user-select:text}.diagram-channel span{white-space:nowrap}
 @media(max-width:1023px){.service-overview-grid{grid-template-columns:1fr}.service-area{padding:28px}.workflow-three{grid-template-columns:repeat(3,minmax(0,1fr))}.case-rule-grid{grid-template-columns:1fr}.site-nav{gap:12px}}
 @media(max-width:767px){.service-overview-grid{gap:18px}.service-area{padding:25px}.service-area h3{font-size:21px}.operation-note{padding:20px;margin-top:22px}.operation-note h3{font-size:17px}.workflow-three{grid-template-columns:1fr}.plan-common{padding:22px}.plan-common ul{display:grid;gap:12px}.industry-group{padding:22px}.industry-group h3{font-size:18px}.industries-section{padding-top:52px}.rate-grid-two{grid-template-columns:1fr}.diagram-channel{font-size:12px;gap:4px}.diagram-channel .icon{width:18px;height:18px;flex:none}.case-rule-grid{gap:16px}.case-rule{padding:22px}.case-rule .case-count{font-size:23px}}
+
+.service-area h3 .phrase,.feature-card h3 .phrase,.industry-group h3 .phrase{display:inline-block}
