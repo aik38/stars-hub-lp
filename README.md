@@ -1,54 +1,49 @@
-# STARS HUB
+# STARS HUB LP
 
-店舗の予約受付・カスタマーサポートを運用するスターズハブの公式サイト。
+スターズハブの予約受付・カスタマーサポートを案内する静的サイトです。
 
-- 本番：https://killerword.info/
-- GitHub：https://github.com/aik38/stars-hub-lp
-- GitHub Pages：`main` / リポジトリ直下から公開。CNAMEは`killerword.info`。
+- GitHub: https://github.com/aik38/stars-hub-lp
+- GitHub Pages仮URL: https://aik38.github.io/stars-hub-lp/
+- 将来の本番予定ドメイン: `killerword.info`（今回は接続しません）
 
-## ページ
+## ページ構成
 
-| URL | 目的 |
+| パス | 内容 |
 | --- | --- |
-| `/` | 受付業務を任せる価値、対応業務、利用者の声、料金概要、対応業種、導入相談 |
-| `/contact-center/` | 受付業務、顧客情報、変更対応、現場共有、既存環境、運用設計 |
-| `/pricing/` | 3プラン、案件定義、初期導入費、超過料金、料金例、追加サービス |
-| `/reputation/` | 集客支援、掲示板対策、投稿モニタリングと各料金 |
-| `/contact/` | メール下書き作成、直接メール、LINE相談 |
-| `/privacy/` | 個人情報・GA4等の取り扱い |
+| `/` | トップページ |
+| `/contact-center/` | 予約受付・カスタマーサポート |
+| `/reputation/` | 集客・評判対策・ネット監視 |
+| `/pricing/` | 料金 |
+| `/contact/` | LINE・メールでのお問い合わせ |
+| `/privacy/` | プライバシーポリシー |
 | `/legal/` | 運営者情報 |
-| `/404.html` | 不明なURLからの復帰 |
+| `/404.html` | ページが見つからない場合の案内 |
 
-## 実装と再生成
+仮URLでは、上記パスの先頭に `/stars-hub-lp` が付きます。
 
-静的HTML、共通CSS、必要最小限のJavaScript、独自SVG。サイト表示にフレームワークやビルドサーバーは不要。外部フォントを読み込まない。
+## 使用技術
 
-`tools/build_site.py`で共通ヘッダー・フッターと各ページを生成する。
+HTML、CSS、必要最小限のJavaScript、独自インラインSVG。フレームワーク・外部フォント・外部JavaScript・解析タグ・Cookieを使用しません。FAQはHTMLの`details`を使用し、JavaScriptが無効でも主要内容・ナビゲーション・FAQを利用できます。
 
-```bash
-python3 tools/build_site.py
-python3 tools/check_site.py
-node --check assets/site.js
-```
+## Pages公開方法
 
-生成元は承認済みの保全commit `5202d303876cfca3b6205ef61a1e07a3648e6947`。SEOのtitle・description・canonical等、GA4ブロックを引き継ぎ、privacy/legalの記事本文はHTMLも含めて完全に維持する。商品情報の変更時は、この保全元との整合も確認する。
+GitHubのSettings → Pages → Build and deploymentで、Sourceを **Deploy from a branch**、Branchを **main**、フォルダを **/(root)** に設定します。`.nojekyll` により、HTML等をそのまま配信します。変更はmainへのcommitで再公開されます。
 
-`python3 -m http.server 8000`でリポジトリ直下を配信して確認できる。
+ローカル確認: このリポジトリの親フォルダで `python -m http.server 8000` を実行し、`http://localhost:8000/stars-hub-lp/` を開きます。
 
-## 検証
+## 仮公開と本番切替
 
-- 静的確認：`tools/check_site.py`。料金、案件定義、補助サービス、法務、内部リンク、GA4、canonical等。
-- ブラウザ確認：`tools/browser_check.cjs`。Playwrightを別ディレクトリへインストールし、`PW_MODULE`にパスを設定して実行する。サイト自体にnpm依存はない。
-- 対象：8ページ × 1440 / 1024 / 768 / 390 / 360 px、JavaScriptなし8ページ、FAQ、メニュー、固定CTA、遷移、404、メールアドレスコピー。
-- 表示確認用ページ：`docs/redesign-check.html`（noindex）。検証用のiframe内ではGA4を読み込まない。元HTMLのタグは維持する。
-- GitHub Actions：作業branchだけで検証を実行し、合格したスクリーンショット・結果・OGPを同じbranchへ保存する。
+全HTMLに`noindex, nofollow`、`robots.txt`に`Disallow: /`を設定しています。仮公開中は検索掲載を意図しません。robots.txtはドメイン直下のファイルを参照する仕様のため、プロジェクトPages配下では各ページのnoindexも必須です。
 
-お問い合わせフォームは入力内容から`mailto:`の下書きを開く。自動送信・サーバー保存を行わず、ユーザーがメールアプリで送信する。JavaScriptなしの場合も直接メール・LINEを利用できる。
+今回はCNAME、独自ドメイン向けcanonical・og:url、sitemap、GA4、Search Consoleを設定していません。既存のクチコミスターズのリポジトリ・本番サイト・メール・DNSも変更対象外です。
 
-## 計測・公開設定
+本番切替前に、[公開チェックリスト](docs/launch-checklist.md)に沿ってドメイン・DNS・HTTPS・検索設定・OGP等を確認します。独自ドメインへの切替時には404ページのルートリンクも更新します。
 
-全8ページに既存GA4 `G-8S2N18S2YX` を維持。入力された個人情報を独自イベントでGA4へ送らない。robotsは検索を許可し、sitemap・本番canonical・OGPを設定済み。
+## 設計と検証
 
-2026年10月6日の全面再設計では、Cloudflare・DNS・メール・Google Workspace・Search Console・GA4管理設定を変更しない。保全branch `backup/current-lp-memo-20261006` を維持する。
+- [デザイン仕様](docs/design-spec.md)
+- [公開チェックリスト](docs/launch-checklist.md)
+- [検証記録](docs/verification.md)
+- [画面幅・公開HTTP応答の確認用ページ](docs/responsive-check.html)
 
-`docs/`の過去の設計・仮公開記録は当時の履歴。現在の実装は本READMEと新しい検証結果を確認する。
+料金・案件定義・サービス内容・CTAは2026年10月5日の制作指示に準拠します。最低契約期間、解約・返金条件、支払期限、SLA等の未確定条件は掲載していません。
