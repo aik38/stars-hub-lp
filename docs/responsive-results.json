@@ -1,6 +1,8 @@
 {
-  "implementationCommit": "f6acea1995405053ec8309ea1dcd71fe8fa330b9",
-  "workflow": "https://github.com/aik38/stars-hub-lp/actions/runs/37520130678",
+  "implementationCommit": "0e75ceee6426f7e9374416cdb683115eb6ab8f0b",
+  "baselineCommit": "cc9946e0af57222f80edeb082c5f1ea84ae59dfd",
+  "workflow": "https://github.com/aik38/stars-hub-lp/actions/runs/37525235904",
+  "pagesWorkflow": "https://github.com/aik38/stars-hub-lp/actions/runs/37525235235",
   "base": "https://killerword.info/",
   "total": 45,
   "passed": 45,
@@ -8,9 +10,17 @@
   "matchingCommittedFiles": 16,
   "missingURLStatus": 404,
   "missingURLUsesCustomPage": true,
+  "visibleTextDifferences": 0,
+  "unchangedHTMLOutsideJSONLD": 9,
+  "unchangedAssets": 5,
+  "jsonld": {
+    "WebSite": 1,
+    "Organization": 1,
+    "BreadcrumbList": 7
+  },
   "records": [
     {
-      "checkedAt": "2026-10-06T19:37:50.5006938Z",
+      "checkedAt": "2026-10-06T20:19:57.0433123Z",
       "route": "/",
       "width": 1440,
       "checks": {
@@ -26,13 +36,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "faq": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:51.8943513Z",
+      "checkedAt": "2026-10-06T20:19:59.3211162Z",
       "route": "contact-center/",
       "width": 1440,
       "checks": {
@@ -47,11 +60,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:53.3610974Z",
+      "checkedAt": "2026-10-06T20:20:01.7649896Z",
       "route": "cases/",
       "width": 1440,
       "checks": {
@@ -66,11 +82,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:54.9920508Z",
+      "checkedAt": "2026-10-06T20:20:04.4507703Z",
       "route": "pricing/",
       "width": 1440,
       "checks": {
@@ -86,6 +105,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "supportSummary": true,
@@ -94,7 +116,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:56.2093693Z",
+      "checkedAt": "2026-10-06T20:20:06.5676405Z",
       "route": "reputation/",
       "width": 1440,
       "checks": {
@@ -110,12 +132,15 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "serviceFees": true,
         "serviceStructure": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:57.2692045Z",
+      "checkedAt": "2026-10-06T20:20:08.4715671Z",
       "route": "contact/",
       "width": 1440,
       "checks": {
@@ -130,11 +155,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:58.4033715Z",
+      "checkedAt": "2026-10-06T20:20:10.3907464Z",
       "route": "privacy/",
       "width": 1440,
       "checks": {
@@ -149,11 +177,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:37:59.4033214Z",
+      "checkedAt": "2026-10-06T20:20:12.5380630Z",
       "route": "legal/",
       "width": 1440,
       "checks": {
@@ -168,11 +199,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:00.3383789Z",
+      "checkedAt": "2026-10-06T20:20:14.3493686Z",
       "route": "404.html",
       "width": 1440,
       "checks": {
@@ -187,11 +221,14 @@
         "targets": true,
         "cases": true,
         "errors": true,
-        "indexing": true
+        "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:04.6471034Z",
+      "checkedAt": "2026-10-06T20:20:19.5341022Z",
       "route": "/",
       "width": 1024,
       "checks": {
@@ -207,6 +244,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "menuOpen": true,
@@ -216,7 +256,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:07.0849926Z",
+      "checkedAt": "2026-10-06T20:20:23.1926400Z",
       "route": "contact-center/",
       "width": 1024,
       "checks": {
@@ -232,13 +272,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:09.5909369Z",
+      "checkedAt": "2026-10-06T20:20:26.6646365Z",
       "route": "cases/",
       "width": 1024,
       "checks": {
@@ -254,13 +297,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:12.1839848Z",
+      "checkedAt": "2026-10-06T20:20:30.3086971Z",
       "route": "pricing/",
       "width": 1024,
       "checks": {
@@ -276,6 +322,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "supportSummary": true,
@@ -287,7 +336,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:14.4155448Z",
+      "checkedAt": "2026-10-06T20:20:33.3996768Z",
       "route": "reputation/",
       "width": 1024,
       "checks": {
@@ -303,6 +352,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "serviceFees": true,
         "serviceStructure": true,
         "menuOpen": true,
@@ -311,7 +363,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:16.3877293Z",
+      "checkedAt": "2026-10-06T20:20:36.2884021Z",
       "route": "contact/",
       "width": 1024,
       "checks": {
@@ -327,13 +379,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:18.3878923Z",
+      "checkedAt": "2026-10-06T20:20:39.1732046Z",
       "route": "privacy/",
       "width": 1024,
       "checks": {
@@ -349,13 +404,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:20.2437960Z",
+      "checkedAt": "2026-10-06T20:20:41.8759907Z",
       "route": "legal/",
       "width": 1024,
       "checks": {
@@ -371,13 +429,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:22.0759984Z",
+      "checkedAt": "2026-10-06T20:20:44.7405694Z",
       "route": "404.html",
       "width": 1024,
       "checks": {
@@ -393,13 +454,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:25.7881795Z",
+      "checkedAt": "2026-10-06T20:20:49.8641165Z",
       "route": "/",
       "width": 768,
       "checks": {
@@ -415,6 +479,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "menuOpen": true,
@@ -424,7 +491,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:28.0209624Z",
+      "checkedAt": "2026-10-06T20:20:53.0096084Z",
       "route": "contact-center/",
       "width": 768,
       "checks": {
@@ -440,13 +507,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:30.3182750Z",
+      "checkedAt": "2026-10-06T20:20:56.3975317Z",
       "route": "cases/",
       "width": 768,
       "checks": {
@@ -462,13 +532,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:32.7481836Z",
+      "checkedAt": "2026-10-06T20:20:59.9321525Z",
       "route": "pricing/",
       "width": 768,
       "checks": {
@@ -484,6 +557,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "supportSummary": true,
@@ -495,7 +571,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:34.8399121Z",
+      "checkedAt": "2026-10-06T20:21:02.9225889Z",
       "route": "reputation/",
       "width": 768,
       "checks": {
@@ -511,6 +587,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "serviceFees": true,
         "serviceStructure": true,
         "menuOpen": true,
@@ -519,7 +598,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:36.7974922Z",
+      "checkedAt": "2026-10-06T20:21:05.7285797Z",
       "route": "contact/",
       "width": 768,
       "checks": {
@@ -535,13 +614,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:38.8130769Z",
+      "checkedAt": "2026-10-06T20:21:08.6157599Z",
       "route": "privacy/",
       "width": 768,
       "checks": {
@@ -557,13 +639,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:40.8214924Z",
+      "checkedAt": "2026-10-06T20:21:11.2863801Z",
       "route": "legal/",
       "width": 768,
       "checks": {
@@ -579,13 +664,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:42.6214120Z",
+      "checkedAt": "2026-10-06T20:21:13.9023121Z",
       "route": "404.html",
       "width": 768,
       "checks": {
@@ -601,13 +689,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:46.0373376Z",
+      "checkedAt": "2026-10-06T20:21:18.7272811Z",
       "route": "/",
       "width": 390,
       "checks": {
@@ -623,6 +714,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "menuOpen": true,
@@ -632,7 +726,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:48.0898632Z",
+      "checkedAt": "2026-10-06T20:21:22.0150430Z",
       "route": "contact-center/",
       "width": 390,
       "checks": {
@@ -648,13 +742,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:50.3359291Z",
+      "checkedAt": "2026-10-06T20:21:25.4690607Z",
       "route": "cases/",
       "width": 390,
       "checks": {
@@ -670,13 +767,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:52.7189565Z",
+      "checkedAt": "2026-10-06T20:21:28.9467057Z",
       "route": "pricing/",
       "width": 390,
       "checks": {
@@ -692,6 +792,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "supportSummary": true,
@@ -703,7 +806,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:54.6985960Z",
+      "checkedAt": "2026-10-06T20:21:32.0202561Z",
       "route": "reputation/",
       "width": 390,
       "checks": {
@@ -719,6 +822,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "serviceFees": true,
         "serviceStructure": true,
         "menuOpen": true,
@@ -727,7 +833,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:56.6533628Z",
+      "checkedAt": "2026-10-06T20:21:35.0329378Z",
       "route": "contact/",
       "width": 390,
       "checks": {
@@ -743,13 +849,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:38:58.6750787Z",
+      "checkedAt": "2026-10-06T20:21:38.0279676Z",
       "route": "privacy/",
       "width": 390,
       "checks": {
@@ -765,13 +874,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:00.5107867Z",
+      "checkedAt": "2026-10-06T20:21:40.8901594Z",
       "route": "legal/",
       "width": 390,
       "checks": {
@@ -787,13 +899,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:02.2653161Z",
+      "checkedAt": "2026-10-06T20:21:43.7271984Z",
       "route": "404.html",
       "width": 390,
       "checks": {
@@ -809,13 +924,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:05.1628619Z",
+      "checkedAt": "2026-10-06T20:21:48.0661084Z",
       "route": "/",
       "width": 360,
       "checks": {
@@ -831,6 +949,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "menuOpen": true,
@@ -840,7 +961,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:07.6866070Z",
+      "checkedAt": "2026-10-06T20:21:51.0107311Z",
       "route": "contact-center/",
       "width": 360,
       "checks": {
@@ -856,13 +977,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:09.9146630Z",
+      "checkedAt": "2026-10-06T20:21:54.4601907Z",
       "route": "cases/",
       "width": 360,
       "checks": {
@@ -878,13 +1002,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:12.4299236Z",
+      "checkedAt": "2026-10-06T20:21:57.9365608Z",
       "route": "pricing/",
       "width": 360,
       "checks": {
@@ -900,6 +1027,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "additionalFee": true,
         "feeHierarchy": true,
         "supportSummary": true,
@@ -911,7 +1041,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:14.4608805Z",
+      "checkedAt": "2026-10-06T20:22:00.7480344Z",
       "route": "reputation/",
       "width": 360,
       "checks": {
@@ -927,6 +1057,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "serviceFees": true,
         "serviceStructure": true,
         "menuOpen": true,
@@ -935,7 +1068,7 @@
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:16.5856311Z",
+      "checkedAt": "2026-10-06T20:22:03.4322053Z",
       "route": "contact/",
       "width": 360,
       "checks": {
@@ -951,13 +1084,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:18.7082984Z",
+      "checkedAt": "2026-10-06T20:22:06.1419368Z",
       "route": "privacy/",
       "width": 360,
       "checks": {
@@ -973,13 +1109,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:20.7084493Z",
+      "checkedAt": "2026-10-06T20:22:08.9298227Z",
       "route": "legal/",
       "width": 360,
       "checks": {
@@ -995,13 +1134,16 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true
       }
     },
     {
-      "checkedAt": "2026-10-06T19:39:22.6969894Z",
+      "checkedAt": "2026-10-06T20:22:11.4088032Z",
       "route": "404.html",
       "width": 360,
       "checks": {
@@ -1017,6 +1159,9 @@
         "cases": true,
         "errors": true,
         "indexing": true,
+        "semantics": true,
+        "jsonld": true,
+        "visibleTextUnchanged": true,
         "menuOpen": true,
         "menuEscape": true,
         "menuLink": true

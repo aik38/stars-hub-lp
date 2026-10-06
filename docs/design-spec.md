@@ -1,6 +1,6 @@
 # STARS HUB 現行デザイン正本
 
-更新日：2026年10月7日。今回の料金差分の実行正本は `STARS_HUB_料金表示・周辺サービス料金追加_Work指示_2026-10-07.txt`。完成済みのデザインを維持し、料金情報だけを更新しています。トップの基準はmain `1dd7d9ebd2c58147fb7a1791828e53c777ce9b0a`。詳細ページをこのトップに合わせています。
+更新日：2026年10月7日。今回の唯一の実行正本は `STARS_HUB_技術SEO最終最適化_厳格版_Work指示_2026-10-07.txt`。開始時main `cc9946e0af57222f80edeb082c5f1ea84ae59dfd` の表示・文章・料金と、本書の事業仕様を維持しています。トップのデザイン基準は `1dd7d9ebd2c58147fb7a1791828e53c777ce9b0a`。詳細ページをこのトップに合わせています。
 
 ## 配色・文字・幅
 
@@ -132,6 +132,14 @@ LINE：`https://lin.ee/X0mxy9O`。メール：`mailto:m-asakura@killerword.info`
 検証幅は1440・1024・768・390・360px。横スクロールを発生させず、一覧や表はモバイルで縦に読み進められる構造。段落・リンクの自然な折り返しを優先します。FAQは共通JSの開閉ボタンで、JSなしでも回答本文を表示します。モバイルの相談導線とフッターナビはJSなしでも利用できます。
 
 全ページのtitle、description、canonical、OGP、Twitter情報を本番URLに整合。GA4は `G-8S2N18S2YX`。robotsは公開を許可し、sitemapは404を除く8URL。CNAMEは `killerword.info`。OGPとfaviconは現行の文字ロゴとブルーへ合わせ、旧ブランドマークを使いません。
+
+### 技術SEO（2026年10月7日）
+
+公開8ページのcanonicalは各ページ自身の `https://killerword.info/` 配下の末尾スラッシュ付きURL。`og:url` と一致します。公開ページはindex可能、`/404.html` は既存の `noindex, follow` を維持します。robotsは `User-agent: *`、`Allow: /`、sitemap参照のまま。sitemapは公開8URLだけを含み、404・changefreq・priority・lastmodを追加しません。
+
+トップのheadにWebSite・OrganizationのJSON-LDを追加。名前は `STARS HUB`、別名は `スターズハブ`、URLは `https://killerword.info/`。Organizationのメールは `m-asakura@killerword.info`、所在地は `/legal/` の現在の記載と一致します。`@id` は `#website`・`#organization`。詳細7ページには、現在表示されている「トップ / 各ページ名」の2階層と一致するBreadcrumbListだけを追加します。価格・Review・AggregateRating・Product・Offer・Service・SearchAction・FAQPageは追加しません。
+
+今回のHTML変更はhead内のJSON-LDのみ。title・description・OG/Twitterの文章、body、CSS・実行JS・画像、料金・投稿モニタリングの記載は変更しません。GA4 ID・読み込みを維持し、Analytics・Search Console管理画面は操作しません。`scripts/verify-seo.py` と既存ブラウザ検証で、開始時mainとのHTML・アセット一致および5画面幅の可視テキスト一致を確認します。この比較基準は今回の表示維持を検証するためのものです。
 
 ## 禁止事項
 
