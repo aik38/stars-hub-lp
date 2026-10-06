@@ -37,6 +37,16 @@
 .case-context p { font-size: 14px; color: var(--text-sub); margin-top: 8px; }
 .case-copy p { color: var(--text-sub); }
 .case-copy p + p { margin-top: 12px; color: var(--text); font-weight: 600; }
+/* Supporting-service fees follow the existing quiet detail rows. */
+.service-menu-heading { margin-top: 24px; color: var(--text-sub); font-size: 16px; font-weight: 600; }
+.service-fees { margin: 16px 0 0; color: var(--text-sub); }
+.service-fees > div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px 24px; padding-block: 12px; border-bottom: 1px solid rgba(0,78,152,.12); }
+.service-fees dd { margin: 0; font-weight: 600; }
+.service-fees-summary { margin-top: 0; }
+.service-fees-summary dd { font-weight: 400; }
+.service-fees-summary .text-link { margin-top: 0; }
+.service-fee-note { margin-top: 16px; font-size: 14px; color: var(--text-sub); }
+#support-pricing > .container > .text-link { margin-top: 24px; }
 .tax-note { color: var(--text-sub); font-size: 14px; margin-bottom: 16px; }
 .count-examples { margin: 0; border-top: 1px solid rgba(0,78,152,.22); }
 .count-examples > div { display: grid; grid-template-columns: 1fr 180px; gap: 32px; align-items: baseline; padding-block: 24px; border-bottom: 1px solid rgba(0,78,152,.22); }
@@ -97,6 +107,7 @@
   .case-context { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
   .case-context p { margin: 0; }
   .count-examples > div { grid-template-columns: 1fr; gap: 8px; }
+  .service-fees-summary > div { grid-template-columns: 1fr; gap: 4px; }
   .count-examples dd { font-size: 20px; }
   .section-index { gap: 24px; padding-block: 24px; }
   .section-index a { gap: 16px; min-width: 0; flex: 1; }

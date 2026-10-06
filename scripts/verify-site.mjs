@@ -32,7 +32,26 @@ try {
           return box.width && (box.left < -1 || box.right > innerWidth + 1);
         }).map(el => ({ tag: el.tagName, class: el.className, text: el.textContent.trim().slice(0, 80) }));
         const targets = [...document.querySelectorAll('.button,.menu-toggle,.footer-nav a,.site-nav a,.faq-question,.case-index a,.section-index a')].filter(visible);
+        const additional = document.querySelector('.price-additional p');
+        const initial = document.querySelector('.price-notes > div:first-child p');
+        const fees = [...document.querySelectorAll('.service-fees')].map(list => ({
+          label: list.getAttribute('aria-label'),
+          rows: [...list.children].map(row => [row.querySelector('dt').textContent.trim(), row.querySelector('dd').textContent.trim()])
+        }));
         return {
+          pricing: {
+            additional: additional?.textContent.trim(),
+            additionalSize: additional && parseFloat(getComputedStyle(additional).fontSize),
+            additionalColor: additional && getComputedStyle(additional).color,
+            initialSize: initial && parseFloat(getComputedStyle(initial).fontSize),
+            fees,
+            headings: [...document.querySelectorAll('main h2')].map(el => el.textContent.trim()),
+            profileParent: document.querySelector('.service-menu-heading:last-of-type')?.closest('article')?.querySelector('h3')?.textContent.trim(),
+            supportLink: document.querySelector('#support-pricing > .container > a')?.getAttribute('href'),
+            growthExternal: document.querySelector('#growth a[href="https://kuchikomi-stars.com/"]')?.getAttribute('href'),
+            firstStoreNote: document.querySelector('#risk .service-fee-note')?.textContent.trim(),
+            monitoring: [...document.querySelectorAll('#risk .detail-row')].find(row => row.querySelector('h3')?.textContent === '投稿モニタリング')?.textContent.trim()
+          },
           viewport: innerWidth, scrollWidth: document.documentElement.scrollWidth, overflow,
           h1: [...document.querySelectorAll('h1')].map(el => el.textContent.trim()),
           title: document.title, description: document.querySelector('meta[name=description]')?.content,
@@ -68,6 +87,29 @@ try {
         errors: !errors.length,
         indexing: route === '404.html' ? record.robots.includes('noindex') : !record.robots.includes('noindex')
       };
+      if (route === '' || route === 'pricing/') {
+        checks.additionalFee = record.pricing.additional === '規定件数を超える場合：1案件 1,650円（税込）';
+        checks.feeHierarchy = record.pricing.additionalSize < record.pricing.initialSize && record.pricing.additionalColor === 'rgb(75, 81, 88)';
+      }
+      if (route === 'pricing/') {
+        const expected = [
+          ['媒体・求人コンテンツ制作', '10件 26,000円〜'], ['プロフィール文章作成', '7,000円〜'], ['クチコミスターズ', 'サービス・料金を見る→'],
+          ['掲示板対策', '初回100件 8,000円〜'], ['投稿モニタリング', '料金は内容に応じてご案内']
+        ];
+        checks.supportSummary = JSON.stringify(record.pricing.fees.flatMap(list => list.rows)) === JSON.stringify(expected) && record.pricing.supportLink === '/reputation/';
+        const headings = record.pricing.headings;
+        const support = headings.indexOf('集客支援・リスク対策の料金');
+        checks.supportPosition = support === headings.indexOf('複数店舗・受付量が多い場合') + 1 && support + 1 === headings.indexOf('料金についてのよくある質問');
+      }
+      if (route === 'reputation/') {
+        const expected = [
+          { label: '媒体・求人コンテンツ制作の料金', rows: [['10件','26,000円'],['20件','50,000円'],['50件','120,000円'],['100件','230,000円']] },
+          { label: 'プロフィール文章作成の料金', rows: [['標準 600〜900字','7,000円'],['ロング 1,200字＋キャッチコピー3本','10,000円']] },
+          { label: '掲示板対策の料金', rows: [['初回100件','8,000円'],['300件','27,000円'],['500件','42,000円'],['1,000件','78,000円']] }
+        ];
+        checks.serviceFees = JSON.stringify(record.pricing.fees) === JSON.stringify(expected);
+        checks.serviceStructure = record.pricing.profileParent === '媒体・求人コンテンツ制作' && record.pricing.growthExternal === 'https://kuchikomi-stars.com/' && record.pricing.firstStoreNote === '初回100件は1店舗1回まで' && record.pricing.monitoring.includes('料金は内容に応じてご案内します。') && !/\d+円/.test(record.pricing.monitoring);
+      }
       if (width < 1200) {
         const toggle = page.locator('.menu-toggle');
         await toggle.click();

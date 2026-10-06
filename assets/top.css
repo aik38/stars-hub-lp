@@ -143,6 +143,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue-dark); out
 .price-notes h3 { font-size: 18px; font-weight: 600; }
 .price-notes p { margin-top: 8px; color: var(--blue-dark); font-size: 22px; font-weight: 600; }
 .price-notes small { display: block; color: var(--text-sub); font-size: 14px; font-weight: 400; }
+.price-notes .price-additional { align-self: center; }
+.price-notes .price-additional p { margin-top: 0; color: var(--text-sub); font-size: 14px; font-weight: 400; }
 .case-definition { max-width: 1040px; margin-top: 24px; color: var(--text-sub); font-size: 14px; line-height: 1.9; }
 .pricing-link { margin-top: 24px; }
 
